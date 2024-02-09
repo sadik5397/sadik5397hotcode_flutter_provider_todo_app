@@ -51,9 +51,15 @@ class ToDoProvider with ChangeNotifier {
 
   toggleShowCompleted() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    showCompletedStatus = pref.getBool("showCompleted") ?? false;
+    checkShowCompletedStatus();
     showCompletedStatus = !showCompletedStatus;
     pref.setBool("showCompleted", showCompletedStatus);
+    refresh();
+  }
+
+  checkShowCompletedStatus() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    showCompletedStatus = pref.getBool("showCompleted") ?? false;
     refresh();
   }
 
